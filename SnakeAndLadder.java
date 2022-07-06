@@ -1,4 +1,4 @@
-//The Player then checks for a Option. They are No Play, Ladder or Snake.
+//Repeat till the Player reaches the winning position 100.
 
 public class SnakeAndLadder {
 	
@@ -27,5 +27,11 @@ public class SnakeAndLadder {
 			System.out.println("NO Play");
 		}
 
+		if (currentPosition < START_POSITION) { 
+			currentPosition = START_POSITION;
+		} else if (currentPosition > 100) {
+			currentPosition -= diceNumber;
+		}
+		System.out.println("Player moves position: " + currentPosition);
 	}
 }
