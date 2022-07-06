@@ -1,4 +1,4 @@
-//Ensure the player gets to exact winning position 100.
+//Report the number of times the dice was played to win the game and also the position after every die role
 
 public class SnakeAndLadder {
 	
@@ -8,7 +8,9 @@ public class SnakeAndLadder {
 	public static final int NO_PLAY = 0;
 
 	public static int currentPosition = 0;
-	
+	public static int totalDiceRolls = 0;
+
+
 	public static void playerPositionMoves() {
 		while (currentPosition < 100) {
 			
@@ -16,7 +18,7 @@ public class SnakeAndLadder {
 			int diceNumber = (int) ((Math.random() * 6) + 1);
 			System.out.println("Dice Number : " + diceNumber);
 
-			int option = (int) ((Math.random() * 3) + 1); 
+			int option = (int) ((Math.random() * 3) + 1);
 			if (option == IS_SNAKE) {
 				currentPosition -= diceNumber;
 				System.out.println("Snake bites....");
@@ -32,22 +34,24 @@ public class SnakeAndLadder {
 			} else if (currentPosition > 100) {
 				currentPosition -= diceNumber;
 			}
-			
+			totalDiceRolls++;
 			System.out.println("Player moves position: " + currentPosition);
 		}
 	}
+
+
 
 	public static void playUntilWin() { 
 		while (currentPosition != 100) {
 			playerPositionMoves();
 		}
-		System.out.println("Player has won");
 	}
 
 	public static void main(String[] args) {
 		System.out.println("<--------Welcome to Snake And Ladder Game---------->");
 		playUntilWin();
 		System.out.println("<--------------------------------------------->");
-				
+		System.out.println("Player has won");
+		System.out.println("Total dice roll: " + totalDiceRolls);
 	}
 }
