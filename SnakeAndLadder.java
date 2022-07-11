@@ -1,9 +1,10 @@
-//Ensure the player gets to exact winning position 100.
+//Report the number of times the dice was played to win the game and also the position after every die role
 
 public class SnakeAndLadder {
      public static void main(String[] args) {
 	int startPosition = 0;
         int currentPosition = 0;
+	int count = 0;
 
         System.out.println("<--------------------Welcome to snake and the ladder games-------------------->");
 
@@ -12,6 +13,7 @@ public class SnakeAndLadder {
 	System.out.println("<--------------------------------------------------------->");
             int diceNumber = (int) ((Math.random() * 6) + 1);
             System.out.println("Dice Number is : "+diceNumber);
+	    count ++ ;
             int option = (int) ((Math.random() * 3) + 1);
 
             switch(option){
@@ -23,6 +25,7 @@ public class SnakeAndLadder {
                         currentPosition += diceNumber; 
                     	if(currentPosition == 100){
 			System.out.println("Hurray!! Player reaches winning position 100");
+			System.out.println("Player has won the game after "+count+ " attempts");
                             System.exit(0);
                             }
 			else{
