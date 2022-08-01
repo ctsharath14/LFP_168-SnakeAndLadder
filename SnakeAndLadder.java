@@ -1,52 +1,90 @@
-//Report the number of times the dice was played to win the game and also the position after every die role
+//Game played between 2 players. If ladder comes then the player plays again. Report who won.
 
-public class SnakeAndLadder {
-     public static void main(String[] args) {
-	int startPosition = 0;
-        int currentPosition = 0;
-	int count = 0;
+public class SnakeAndLadderUC7 {
+    public static void main(String[] args) {
+        int playerPosition1 = 0;
+        int playerPosition2 = 0;
+        int startPosition = 0;
+        int winningPosition = 100;
+        int dieCount1 = 0;
+        int dieCount2 = 0;
+        int dieRoll1 = 0;
+        int dieRoll2 = 0;
+        final int NO_PLAY = 0;
+        final int LADDER = 1;
+        final int SNAKE = 2;
 
-        System.out.println("<--------------------Welcome to snake and the ladder games-------------------->");
+        System.out.println("Welcome to Snake and the Ladder Game");
 
-        System.out.println("Start Position of Player is : " +startPosition);
-	do {
-	System.out.println("<--------------------------------------------------------->");
-            int diceNumber = (int) ((Math.random() * 6) + 1);
-            System.out.println("Dice Number is : "+diceNumber);
-	    count ++ ;
-            int option = (int) ((Math.random() * 3) + 1);
+        while (playerPosition1 != winningPosition && playerPosition2 != winningPosition) {
+            System.out.println("<----------------------------------------------------------------------------------->");
+            Player1Chance:
+                dieRoll1 = (int) ((Math.random()*6)+1);
+                System.out.println("Player1 die number is : "+dieRoll1);
+                dieCount1 ++;
+                int option1 = (int)(Math.random()*3);
 
-            switch(option){
-                case 1: //No Play
-                    System.out.println("NO PLAY!! Players stays in same position");
-                    break;
-                case 2:  //Ladder
-                    if((currentPosition+diceNumber) <= 100){
-                        currentPosition += diceNumber; 
-                    	if(currentPosition == 100){
-			System.out.println("Hurray!! Player reaches winning position 100");
-			System.out.println("Player has won the game after "+count+ " attempts");
-                            System.exit(0);
-                            }
-			else{
-                            System.out.println("Player Moves to : "+currentPosition);
+                switch (option1) {
+                    case NO_PLAY:
+                        System.out.println("It's no play, hence Player1 stays in same position "+playerPosition1);
+                        break;
+
+                    case LADDER:
+                        playerPosition1 = playerPosition1 + dieRoll1;
+                        if (playerPosition1 > 100) {
+                            System.out.println("It's a Ladder, Player1 position above hundred and hence stays in same position "+playerPosition1);
+                            break;
                         }
-                    }
-			else{
-                        System.out.println("Current position is greater than 100, hence the chance is skipped");
-                    }
-                    break;
-                case 3: //Snake Bite
-                    if((currentPosition - diceNumber) >= 0){
-                        currentPosition -= diceNumber;
-                        System.out.println("Snake Bites!! Player moves back to : "+currentPosition);
-                    	}
-		    else{
-                        currentPosition = 0;
-                        System.out.println("Snake Bite!! Player moves back to starting position");
-                    }
-                    break;
+                        System.out.println("It's a Ladder, Player1 current position is : "+playerPosition1);
+                        break;
+
+                    case SNAKE:
+                        playerPosition1 = playerPosition1 - dieRoll1;
+                        if (playerPosition1 - dieRoll1 < 0) {
+                            playerPosition1 = 0;
+                            System.out.println("Snake bites!!, Player1 moves to start position "+playerPosition1);
+                        }
+                        System.out.println("Snake bites!!, Player1 current position is : "+playerPosition1);
+                        break;
+                }
+
+            Player2Chance:
+                dieRoll2 = (int) ((Math.random()*6)+1);
+                System.out.println("Player2 die number is : "+dieRoll2);
+                dieCount2 ++;
+                int option2 = (int)(Math.random()*3);
+
+                switch (option2) {
+                    case NO_PLAY:
+                        System.out.println("It's no play, hence Player2 stays in same position "+playerPosition2);
+                        break;
+
+                    case LADDER:
+                        playerPosition2 = playerPosition2 + dieRoll2;
+                        if (playerPosition2 > 100) {
+                            System.out.println("It's a Ladder, Player2 position above hundred and hence stays in same position "+playerPosition2);
+                            break;
+                        }
+                        System.out.println("It's a Ladder, Player2 current position is : "+playerPosition2);
+                        break;
+
+                    case SNAKE:
+                        playerPosition2 = playerPosition2 - dieRoll2;
+                        if (playerPosition2 - dieRoll2 < 0) {
+                            playerPosition2 = 0;
+                            System.out.println("Snake bites!!, Player2 moves to start position "+playerPosition2);
+                        }
+                        System.out.println("Snake bites!!, Player2 current position is : "+playerPosition2);
+                        break;
+                }
             }
-        }while(currentPosition <= 100);
-        }
+            System.out.println("<--------------------------------------------------------------------------------------->");
+            if (playerPosition1 == winningPosition) {
+                System.out.println("Player1 wins the game");
+            }
+            else {
+                System.out.println("Player2 wins the game");
+            }
+            System.out.println("Number of times die rolled to finish the game was : "+dieCount1);
+    }
 }
